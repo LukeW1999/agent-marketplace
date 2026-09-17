@@ -14,7 +14,7 @@
 #include <assert.h>
 
 // Non-deterministic input
-int __ESBMC_nondet_int(void);
+int __VERIFIER_nondet_int(void);
 void __ESBMC_assume(_Bool);
 void __ESBMC_assert(_Bool, const char *);
 
@@ -252,7 +252,7 @@ int out_idx = 0;
 pthread_mutex_t buffer_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void *producer(void *arg) {
-    int item = __ESBMC_nondet_int();
+    int item = __VERIFIER_nondet_int();
     __ESBMC_assume(item > 0);
 
     pthread_mutex_lock(&buffer_mutex);
@@ -369,7 +369,7 @@ void *reader(void *arg) {
 
 void *writer(void *arg) {
     pthread_mutex_lock(&rw_mutex);
-    shared_data = __ESBMC_nondet_int();
+    shared_data = __VERIFIER_nondet_int();
     __ESBMC_assume(shared_data >= 0);
     pthread_mutex_unlock(&rw_mutex);
 
