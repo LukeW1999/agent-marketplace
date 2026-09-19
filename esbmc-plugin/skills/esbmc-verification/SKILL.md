@@ -176,15 +176,15 @@ Use these in the source code to guide verification.
 | Symbolic string | N/A | `nondet_str()` |
 | Symbolic list | N/A | `nondet_list()` |
 | Symbolic dictionary | N/A | `nondet_dict()` |
-| Assumption | `__ESBMC_assume(cond)` | `assume(cond)` |
-| Assertion | `__ESBMC_assert(cond, msg)` | `esbmc_assert(cond, msg)` |
+| Assumption | `__ESBMC_assume(cond)` | `__ESBMC_assume(cond)` |
+| Assertion | `__ESBMC_assert(cond, msg)` | `assert cond, msg` |
 | Atomic section | `__ESBMC_atomic_begin/end()` | N/A |
 
 ### Basic Usage
 
 ```c
-int x = __VERIFIER_nondet_int();       // Symbolic input
-__ESBMC_assume(x > 0 && x < 100);   // Constrain input
+int x = __VERIFIER_nondet_int();     // Symbolic input
+__ESBMC_assume(x > 0 && x < 100);    // Constrain input
 __ESBMC_assert(result >= 0, "msg");  // Verify property
 ```
 

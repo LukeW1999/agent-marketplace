@@ -408,8 +408,8 @@ Claude will automatically use the ESBMC skill when these topics come up, providi
 
 **C/C++:**
 ```c
-int x = __VERIFIER_nondet_int();       // Symbolic input
-__ESBMC_assume(x > 0 && x < 100);   // Constrain
+int x = __VERIFIER_nondet_int();     // Symbolic input
+__ESBMC_assume(x > 0 && x < 100);    // Constrain
 __ESBMC_assert(result >= 0, "msg");  // Verify
 ```
 

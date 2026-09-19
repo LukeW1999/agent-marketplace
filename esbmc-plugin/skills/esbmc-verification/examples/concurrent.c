@@ -7,7 +7,12 @@
  * - Lock ordering violations
  * - Atomicity checks
  *
- * Run with: esbmc concurrent.c --deadlock-check --data-races-check --context-bound 2 --unwind 5
+ * Verify one example at a time:
+ *   esbmc concurrent.c --function safe_counter_example \
+ *         --deadlock-check --data-races-check --context-bound 2 --unwind 5
+ *
+ * Running main() explores all six safe examples together and does not finish
+ * at these bounds.
  */
 
 #include <pthread.h>

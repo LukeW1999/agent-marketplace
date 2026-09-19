@@ -53,6 +53,7 @@ size_t sz = __VERIFIER_nondet_size_t();
 // Usage
 int x = nondet(int);
 float f = nondet(float);
+void *p = nondet(pointer);   // the suffix is `pointer`, not `ptr`
 ```
 
 ### Python Intrinsics
@@ -150,13 +151,13 @@ __ESBMC_assert(result <= MAX_VALUE, "Result within bounds");
 ### Python Syntax
 
 ```python
-from esbmc import esbmc_assert
+from esbmc import __ESBMC_assert
 
 # Standard Python assert
 assert result >= 0
 
 # ESBMC assert with message
-esbmc_assert(result <= MAX_VALUE, "Result within bounds")
+__ESBMC_assert(result <= MAX_VALUE, "Result within bounds")
 ```
 
 ### Assertion Patterns
@@ -367,18 +368,18 @@ int main() {
 ## Python Complete Example
 
 ```python
-from esbmc import nondet_int, assume, esbmc_assert
+from esbmc import nondet_int, assume, __ESBMC_assert
 
 def binary_search(arr: list[int], target: int) -> int:
     """Verified binary search implementation."""
-    esbmc_assert(len(arr) > 0, "Array not empty")
+    __ESBMC_assert(len(arr) > 0, "Array not empty")
 
     left = 0
     right = len(arr) - 1
 
     while left <= right:
-        esbmc_assert(left >= 0, "Left bound valid")
-        esbmc_assert(right < len(arr), "Right bound valid")
+        __ESBMC_assert(left >= 0, "Left bound valid")
+        __ESBMC_assert(right < len(arr), "Right bound valid")
 
         mid = left + (right - left) // 2
 
@@ -410,8 +411,8 @@ def main():
     result = binary_search(arr, target)
 
     if result >= 0:
-        esbmc_assert(result < len(arr), "Result in bounds")
-        esbmc_assert(arr[result] == target, "Found correct element")
+        __ESBMC_assert(result < len(arr), "Result in bounds")
+        __ESBMC_assert(arr[result] == target, "Found correct element")
 
 if __name__ == "__main__":
     main()
